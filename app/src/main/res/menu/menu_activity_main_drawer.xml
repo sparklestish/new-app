@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--menu listed below is based on https://material.io/guidelines/components/-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_buy_waec_card"
+            android:icon="@drawable/ic_whatshot"
+            android:title="Buy Waec Card" />
+        <item
+            android:id="@+id/nav_placement_card"
+            android:icon="@drawable/ic_schedule"
+            android:title="Buy Placement Card" />
+        <item
+            android:id="@+id/nav_check_waec_result"
+            android:icon="@drawable/ic_highlight"
+            android:title="Check WAEC Results" />
+        <item
+            android:id="@+id/nav_placement_result"
+            android:icon="@drawable/ic_highlight"
+            android:title="Check Placement Results" />
+        <item
+            android:id="@+id/nav_cards_history"
+            android:icon="@drawable/ic_highlight"
+            android:title="Cards History" />
+
+    </group>
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_settings"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/ic_help"
+                android:title="Help" />
+        </menu>
+    </item>
+
+</menu>
