@@ -199,7 +199,7 @@
             android:name=".activity.toolbar.ToolbarCollapsePin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.form.FormProfileData"
+            android:name=".waec.FormProfileData"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.form.FormWithIcon"
@@ -484,10 +484,10 @@
             android:name=".activity.settings.SettingProfileLight"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.verification.VerificationPhone"
+            android:name=".waec.VerificationPhone"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.verification.VerificationCode"
+            android:name=".waec.VerificationCode"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.verification.VerificationHeader"
@@ -511,7 +511,7 @@
             android:name=".activity.login.LoginImageTeal"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.login.LoginCardLight"
+            android:name=".waec.LoginCardLight"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.login.LoginCardOverlap"
@@ -556,7 +556,7 @@
             android:name=".activity.bottomnavigation.BottomNavigationMapBlue"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.dashboard.DashboardGridFab"
+            android:name=".waec.DashboardGridFab"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.dashboard.DashboardStatistics"
