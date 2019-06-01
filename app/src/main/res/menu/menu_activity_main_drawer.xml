@@ -9,11 +9,11 @@
             android:title="Home" />
         <item
             android:id="@+id/nav_buy_waec_card"
-            android:icon="@drawable/ic_whatshot"
+            android:icon="@drawable/ic_attach_money"
             android:title="Buy Waec Card" />
         <item
             android:id="@+id/nav_placement_card"
-            android:icon="@drawable/ic_schedule"
+            android:icon="@drawable/ic_credit_card_grey"
             android:title="Buy Placement Card" />
         <item
             android:id="@+id/nav_check_waec_result"
@@ -21,12 +21,12 @@
             android:title="Check WAEC Results" />
         <item
             android:id="@+id/nav_placement_result"
-            android:icon="@drawable/ic_highlight"
+            android:icon="@drawable/ic_web_asset"
             android:title="Check Placement Results" />
         <item
             android:id="@+id/nav_cards_history"
-            android:icon="@drawable/ic_highlight"
-            android:title="Cards History" />
+            android:icon="@drawable/ic_history"
+            android:title="Cards Inbox" />
 
     </group>
 
@@ -35,7 +35,7 @@
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_settings"
-                android:title="Settings" />
+                android:title="Update Profile" />
             <item
                 android:id="@+id/nav_help"
                 android:icon="@drawable/ic_help"

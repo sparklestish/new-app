@@ -31,6 +31,27 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".waec.BuyWaecCard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".waec.CheckWaecResults"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".waec.SingleWaecCard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".waec.InboxHistory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".waec.Help"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".waec.BuyPlacementCard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".waec.CheckPlacementResults"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.bottomnavigation.BottomNavigationBasic"
             android:screenOrientation="portrait" />
         <activity
@@ -355,10 +376,10 @@
             android:name=".activity.noitem.NoItemSearch"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.noitem.NoItemInternetIcon"
+            android:name=".waec.NoItemInternetIcon"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.noitem.NoItemInternetImage"
+            android:name=".waec.NoItemInternetImage"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.noitem.NoItemBgCity"

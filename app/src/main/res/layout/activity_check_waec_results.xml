@@ -1,44 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_10"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <!--toolbar and header-->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@color/colorPrimary">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/world_map"
-            android:tint="@color/overlay_light_30" />
+        <include layout="@layout/toolbar" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentInsetStartWithNavigation="0dp"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:subtitle="welcome to WAEC Results Checker"
-            app:subtitleTextAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-            app:subtitleTextColor="@color/grey_10"
-            app:title="Hi, User" />
+    </android.support.design.widget.AppBarLayout>
 
-
-    </RelativeLayout>
-
-    <WebView
-        android:id="@+id/webview_waec_results"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        tools:openDrawer="start">
 
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <WebView
+                android:id="@+id/webview_waec_results"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+        <!--navigation drawer menu-->
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="false"
+            android:background="@color/grey_5"
+            android:paddingTop="@dimen/spacing_large"
+            app:itemIconTint="@color/grey_600"
+            app:itemTextAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:itemTextColor="@color/blue_grey_900"
+            app:menu="@menu/menu_activity_main_drawer"/>
+
+    </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>

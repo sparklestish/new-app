@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <!--toolbar and header-->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+
+
+                <com.balysv.materialripple.MaterialRippleLayout
+                    style="@style/RippleStyleBlack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/lyt_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:orientation="vertical">
+
+
+                        <!--<RelativeLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="30dp">-->
+
+                        <!--</RelativeLayout>-->
+
+                        <ImageView
+                            android:id="@+id/image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/waec_card_img" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/spacing_medium" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/spacing_middle"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:id="@+id/title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:layout_marginTop="@dimen/spacing_xmedium"
+                                android:text="WAEC Results Checker Card"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/grey_90" />
+
+                            <ImageButton
+                                android:id="@+id/more"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/spacing_xlarge"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:tint="@color/grey_40"
+                                app:srcCompat="@drawable/ic_more_vert" />
+
+                            <View
+                                android:layout_width="@dimen/spacing_small"
+                                android:layout_height="0dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/spacing_medium" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="@dimen/spacing_middle"
+                                android:layout_height="0dp" />
+
+                            <android.support.v7.widget.AppCompatRatingBar
+                                style="@style/Yellow.Small.AppCompatRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:numStars="5"
+                                android:rating="3.5"
+                                android:stepSize="1"
+                                android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Gh¢ 10.00"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/colorPrimary"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="@dimen/spacing_middle"
+                                android:layout_height="0dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/spacing_middle" />
+
+                    </LinearLayout>
+
+                </com.balysv.materialripple.MaterialRippleLayout>
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/add_to_cart_waec_single"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="330dp"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/btn_rounded_red"
+                    android:text="Add to Cart"
+                    android:padding="10dp"
+                    android:textColor="@android:color/white" />
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+        <!--navigation drawer menu-->
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="false"
+            android:background="@color/grey_5"
+            android:paddingTop="@dimen/spacing_large"
+            app:itemIconTint="@color/grey_600"
+            app:itemTextAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:itemTextColor="@color/blue_grey_900"
+            app:menu="@menu/menu_activity_main_drawer"/>
+
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

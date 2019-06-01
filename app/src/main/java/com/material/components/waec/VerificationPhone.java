@@ -1,6 +1,10 @@
 package com.material.components.waec;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +26,9 @@ import java.util.regex.Pattern;
 public class VerificationPhone extends AppCompatActivity {
 
     EditText editPhoneNumber;
-    public String verify_code;
-
-
+    public String verify_code = "";
+    String phoneStored = "", emailStored = "";
+    private BroadcastReceiver MyReceiver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +36,23 @@ public class VerificationPhone extends AppCompatActivity {
         setContentView(R.layout.activity_verification_phone);
         Tools.setSystemBarColor(this, R.color.grey_20);
 
-        //   if the user is already logged in we will directly start the profile activity
-        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
-            finish();
-            startActivity(new Intent(this, DashboardGridFab.class));
-            return;
-        }
+        MyReceiver = new MyReceiver();
 
+        SharedPreferences pref = getSharedPreferences("loginData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        emailStored = pref.getString("email", null);
+        phoneStored = pref.getString("phonenumber", null);
+
+
+        if(phoneStored == null){
+
+        }
+        else{
+            Intent in = new Intent(getApplicationContext(), DashboardGridFab.class);
+            startActivity(in);
+        }
         editPhoneNumber = findViewById(R.id.editPhoneNumber);
-        verify_code = "";
+        //verify_code = "";
 
 
         findViewById(R.id.continue_verification).setOnClickListener(new View.OnClickListener() {
@@ -48,6 +60,7 @@ public class VerificationPhone extends AppCompatActivity {
             public void onClick(View view) {
                 //if user pressed on button register
                 //here we will register the user to server
+                broadcastIntent();
                 registerUser();
             }
         });
@@ -62,6 +75,16 @@ public class VerificationPhone extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void broadcastIntent() {
+        registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(MyReceiver);
     }
 
     private void registerUser() {
@@ -128,22 +151,14 @@ public class VerificationPhone extends AppCompatActivity {
 
                     //if no error in response
                     if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
-                        //getting the user from the response
-                        JSONObject userJson = obj.getJSONObject("user");
-
-                        //creating a new user object
-//                        User user = new User(
-//                                userJson.getInt("id"),
-//                                userJson.getString("phonenumber"),
-//                                userJson.getString("verify_code")
-//                        );
-
-                        //storing the user in shared preferences
-                        //SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
-                        startActivity(new Intent(getApplicationContext(), VerificationCode.class));
+                        SharedPreferences pref = getSharedPreferences("loginData", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("phonenumber", phonenumber);
+                        editor.putString("verify_code", verify_code);
+                        editor.commit();
+                        Intent in = new Intent(getApplicationContext(), VerificationCode.class);
+                        startActivity(in);
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Some error occurred", Toast.LENGTH_SHORT).show();

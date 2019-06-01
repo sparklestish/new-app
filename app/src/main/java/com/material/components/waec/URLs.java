@@ -7,6 +7,7 @@ public class URLs {
     public static final String URL_REGISTER = ROOT_URL + "signup";
     public static final String URL_LOGIN= ROOT_URL + "login";
     public static final String URL_ACTIVATE= ROOT_URL + "activate";
+    public static final String URL_UPDATE_PROFILE= ROOT_URL + "update_profile";
     public static final String URL_WAEC_CARD= ROOT_URL + "waec_cards";
     public static final String URL_PLACEMENT_CARD= ROOT_URL + "placement_cards";
 }

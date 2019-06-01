@@ -1,7 +1,11 @@
 package com.material.components.waec;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.github.kittinunf.fuel.Fuel;
@@ -22,6 +27,8 @@ import com.github.kittinunf.fuel.core.Response;
 import com.material.components.R;
 import com.material.components.utils.Tools;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -31,12 +38,14 @@ import kotlin.Pair;
 
 public class VerificationCode extends AppCompatActivity {
     public String phonenumber, verify_code;
+    private BroadcastReceiver MyReceiver = null;
     Context context;
+    String verifyCode_stored = "";
     EditText v1, v2, v3, v4;
 
     private List<Pair<String, String>> params;
     private View parent_view;
-
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +54,11 @@ public class VerificationCode extends AppCompatActivity {
         context = getApplicationContext();
 
         initToolbar();
+        MyReceiver = new MyReceiver();
+
+        SharedPreferences pref = getSharedPreferences("loginData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        phonenumber = pref.getString("phonenumber", null);
 
         v1 = findViewById(R.id.v1);
         v2 = findViewById(R.id.v2);
@@ -55,6 +69,10 @@ public class VerificationCode extends AppCompatActivity {
         findViewById(R.id.btn_verify_code).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                broadcastIntent();
+                progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                progressBar.setVisibility(View.VISIBLE);
+
                 Log.e("WeacApp", "Starting Fuel");
                 verify_code = v1.getText().toString() + v2.getText().toString() + v3.getText().toString() + v4.getText().toString();
                 params = new ArrayList<Pair<String, String>>() {{
@@ -65,19 +83,24 @@ public class VerificationCode extends AppCompatActivity {
                 Fuel.post(URLs.URL_ACTIVATE, params).responseString(new Handler<String>() {
                     @Override
                     public void success(Request request, Response response, String s) {
+                        progressBar.setVisibility(View.GONE);
                         try {
 
                             Log.e("WeacApp", "Worked");
                             //progressDialog.dismiss();
                             JSONObject obj = new JSONObject(s);
-                            Log.e("WeacApp", "Response from server "+s.toString());
 
-                            if(!obj.getBoolean("error")){
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                            } else{
-                                startActivity(new Intent(getApplicationContext(), FormProfileData.class));
+                            if(s.contains("Account Activated Successfully")){
+
+                                Intent in = new Intent(getApplicationContext(), FormProfileData.class);
+                                startActivity(in);
+
+                            }else{
+
+                                //JSONObject userJson = obj.getJSONObject("user");
+                                Snackbar.make(parent_view, obj.getString("message"), Snackbar.LENGTH_LONG).show();
+
                             }
-                            //startActivity(new Intent(getApplicationContext(), FormProfileData.class));
 
                         } catch (Exception e) {
                             Snackbar.make(parent_view, "Sorry, a fatal error has occurred", Snackbar.LENGTH_LONG).show();
@@ -92,6 +115,8 @@ public class VerificationCode extends AppCompatActivity {
                         Snackbar.make(parent_view, fuelError.toString(), Snackbar.LENGTH_LONG).show();
                         //progressDialog.dismiss();
                     }
+
+
                 });
             }
         });
@@ -101,6 +126,16 @@ public class VerificationCode extends AppCompatActivity {
         codeEditTextFull(v3, v4);
         codeEditTextFull(v4, v1);
 
+    }
+
+    public void broadcastIntent() {
+        registerReceiver(MyReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(MyReceiver);
     }
 
     public void codeEditTextFull(EditText edtFrom, final EditText edtTo) {

@@ -16,7 +16,7 @@ public class ShoppingCartSimple extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopping_cart_simple);
+        setContentView(R.layout.activity_waec_card_single);
         initToolbar();
     }
 
